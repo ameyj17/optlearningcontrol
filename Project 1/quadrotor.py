@@ -5,8 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import matplotlib as mp
+from matplotlib.backends.backend_agg import FigureCanvasAgg
+from matplotlib import animation
 import IPython
-
 
 
 # constant
@@ -95,7 +96,7 @@ def animate_robot(x, u, dt=0.04):
     plotu = u[:, ::steps]
 
     fig = mp.figure.Figure(figsize=[8.5, 8.5])
-    mp.backends.backend_agg.FigureCanvasAgg(fig)
+    FigureCanvasAgg(fig)
     ax = fig.add_subplot(111, autoscale_on=False, xlim=[-4, 4], ylim=[-4, 4])
     ax.grid()
 
@@ -164,7 +165,7 @@ def animate_robot(x, u, dt=0.04):
     def _init():
         return _animate(0)
 
-    ani = mp.animation.FuncAnimation(
+    ani = animation.FuncAnimation(
         fig,
         _animate,
         np.arange(0, len(plotx[0, :])),
